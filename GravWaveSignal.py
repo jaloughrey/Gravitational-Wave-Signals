@@ -1,15 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import numpy as np 
 import pylab as plt
 import pandas as pd
-
-
-# In[ ]:
 
 
 #PART A:
@@ -30,7 +21,6 @@ Mtot_err = GWevents['Mtot_err']
 print(DL)
 
 
-# In[ ]:
 
 
 #plot total mass against distance with error bars 
@@ -43,22 +33,12 @@ plt.grid(linestyle='--')
 plt.legend()
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 #PART B: 
 #1:
 waveform_data = pd.read_csv('Observedwaveform.csv')
 print(waveform_data)
 
 
-# In[ ]:
 
 
 #2: 
@@ -68,8 +48,6 @@ merger_time = 1205951542.153363
 waveform_data['time_shifted (s)'] = waveform_data['time (s)'] - merger_time
 print(waveform_data)
 
-
-# In[ ]:
 
 
 waveform_time = waveform_data['time_shifted (s)'].values
@@ -86,20 +64,10 @@ plt.legend()
 plt.grid(linestyle = "--")
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 #filter the data for the region after the merger (t > 0.02)
 noise_data = waveform_data[waveform_data['time_shifted (s)'] > 0.02]
-
-
-# In[ ]:
 
 
 #strain vs shifted time (s)
@@ -112,9 +80,6 @@ plt.legend()
 plt.grid(linestyle = "--")
 
 
-# In[ ]:
-
-
 #calculate the mean and standard deviation of the strain in this new noise window
 noise_mean = noise_data['strain'].mean()
 noise_std = noise_data['strain'].std()
@@ -122,9 +87,6 @@ noise_std = noise_data['strain'].std()
 #display appropriately 
 print(f"Noise Mean: {noise_mean:.3e}")
 print(f"Noise Standard Deviation: {noise_std:.3e}")
-
-
-# In[ ]:
 
 
 #PART C: 
@@ -142,9 +104,6 @@ plt.legend()
 plt.grid(linestyle = "--")
 
 
-# In[ ]:
-
-
 t_min = mockdata_waveform_40Msun_1Mpc['time (s)'].min() 
 print(f"t_min: {t_min} ")
 
@@ -152,16 +111,11 @@ t_min_o = waveform_data['time_shifted (s)'].min()
 print(f"t_min_o: {t_min_o} ")
 
 
-# In[ ]:
-
 
 mockdata_strain = mockdata_waveform_40Msun_1Mpc['strain'].values
 mockdata_time = mockdata_waveform_40Msun_1Mpc['time (s)'].values
 
 index = np.where((waveform_time > t_min)&(waveform_time < 0.05))[0]
-
-
-# In[ ]:
 
 
 #strain vs shifted time (s) 
@@ -172,9 +126,6 @@ plt.xlabel('time (s)')
 plt.ylabel('strain')
 plt.legend()
 plt.grid(linestyle = "--")
-
-
-# In[ ]:
 
 
 #Part C:
@@ -193,8 +144,6 @@ plt.ylabel('strain')
 plt.legend()
 plt.grid(linestyle = "--")
 
-
-# In[ ]:
 
 
 from scipy.interpolate import interp1d
@@ -216,9 +165,6 @@ plt.xlabel('time (s)')
 plt.ylabel('strain')
 plt.legend()
 plt.grid(linestyle = "--")
-
-
-# In[ ]:
 
 
 #PART D:
@@ -244,15 +190,10 @@ def generate_waveform(interp_fn, t_ref, M_ref, D_ref, M, D):
     return scaled_time, h
 
 
-# In[ ]:
-
 
 mockdata_waveform_70Msun_5Mpc = pd.read_csv('mockdata_waveform_70Msun_5Mpc.csv')
 mock_time = mockdata_waveform_70Msun_5Mpc['time (s)'].values
 mock_strain = mockdata_waveform_70Msun_5Mpc['strain'].values
-
-
-# In[ ]:
 
 
 #PART D:
@@ -279,9 +220,6 @@ plt.xlim(-0.17,0.06)
 plt.legend()
 plt.grid()
 plt.show()
-
-
-# In[ ]:
 
 
 #PART D:
@@ -318,18 +256,12 @@ def compare_waveforms(waveform_time, waveform_strain, interp_fn, M_ref, D_ref, M
     
 
 
-# In[ ]:
-
-
 #define mass and distance ranges for testing
 M_range = np.arange(60, 61, 5)  #masses
 D_range = np.arange(1000, 2001, 100)  #distances
 
 #compare waveforms
 compare_waveforms(waveform_time, waveform_strain, interp_fn, M_ref, D_ref, M_range, D_range)
-
-
-# In[ ]:
 
 
 #define mass and distance ranges for testing
@@ -340,16 +272,10 @@ D_range = np.arange(1000, 1001, 100)  #distances
 compare_waveforms(waveform_time, waveform_strain, interp_fn, M_ref, D_ref, M_range, D_range)
 
 
-# In[ ]:
-
-
 #Plot 3 (chaning both mass and distance in a smaller range)
 M_range = np.arange(70, 80, 2)  #masses
 D_range = np.arange(1400, 1601, 100)  #distances
 compare_waveforms(waveform_time, waveform_strain, interp_fn, M_ref, D_ref, M_range, D_range)
-
-
-# In[ ]:
 
 
 M = 77
@@ -369,9 +295,6 @@ plt.title("Comparison of scaled waveform to observed waveform")
 plt.xlim(-0.17,0.06)
 plt.legend()
 plt.grid(linestyle = "--")
-
-
-# In[ ]:
 
 
 def log_likelihood(waveform_strain, waveform_time, interp_fn, M_ref, D_ref, M, D, sigma):
@@ -443,9 +366,6 @@ waveform_time_index = waveform_time[index]
 M_chain, D_chain = mcmc(waveform_strain_index, waveform_time_index, interp_fn, M_ref, D_ref, M_initial, D_initial, sigma, n_steps, mass_step, distance_step)
 
 
-# In[ ]:
-
-
 #plot the results appropriately
 
 #mass chain
@@ -482,9 +402,6 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
-
-
-# In[ ]:
 
 
 #rolling mean function
@@ -538,9 +455,6 @@ plt.title("Convergence Test")
 plt.show()
 
 
-# In[ ]:
-
-
 #compute statistics
 import statistics
 
@@ -584,9 +498,6 @@ plt.legend()
 plt.grid(linestyle = "--")
 
 
-# In[ ]:
-
-
 def chirp_mass(total_mass, q):
     return total_mass * (q**(3/5)) / ((1 + q)**(6/5))
 
@@ -603,9 +514,6 @@ print(f"Chirp mass: {chirp_mass:.2f} Msun")
 
 M1, M2 = individual_masses(total_mass,q)
 print(f"M1: {M1:.2f} Msun, M2: {M2:.2f} Msun")
-
-
-# In[ ]:
 
 
 def estimate_period(time, strain):
@@ -634,10 +542,6 @@ def estimate_period(time, strain):
 period = estimate_period(waveform_time_index, waveform_strain_index)
 print(f"Estimated period: {period:.5f} seconds")
 
-
-# In[ ]:
-
-
 plt.figure(figsize=(20, 4))
 plt.plot(waveform_time_index, waveform_strain_index, label="Observed waveform")
 plt.axvline(x=waveform_time_index[np.argmax(np.abs(waveform_strain_index))], color='r', linestyle='--', label="peak amplitude")
@@ -652,9 +556,6 @@ plt.legend()
 plt.grid(linestyle = "--")
 
 
-# In[ ]:
-
-
 def seperation(M1,M2,omega):
     #constants
     G = 6.674e-11
@@ -665,10 +566,3 @@ omega = np.pi/period
 R = seperation(M1,M2,omega)
 R_km = R/1000
 print(f"Oribital seperation, R = {R_km:.2f}km")
-
-
-# In[ ]:
-
-
-
-
