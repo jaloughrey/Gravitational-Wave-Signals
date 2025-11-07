@@ -1,38 +1,9 @@
-#### Data Science - Coursework 2 (50%)
+
 # What caused this gravitational wave signal?
-## Deadline Friday week 11, 2pm.
-
-#### Instructions
-
-This coursework assesses learning outcomes from **all Chapters** of the course, but in particular **Chapters 6, 7, 8 and 9**. It is worth 50% of the module. Please ensure you have read the [Chapter 8 Jupyter Notebook](https://github.com/haleygomez/Data-Science-2024/blob/master/blended_exercises/Chapter8/Chapter8.ipynb) before starting this coursework. 
-
-**These assessments are equivalent to an exam**:
-- Submit your work via Turn-It-In on Learning Central. Note that you will need to upload your final notebook exported as a PDF file. **Don't forget to click `run all` before you export it**. You can constantly update this document until the deadline.
-- The breakdown of the assessment criteria is provided in Learning Central under Assessment.
-- Don't worry about how your code looks - marks are not given for pretty code, but rather for the approach used in solving the problem, your reasoning, explanation and answer.
-- It is estimated that the workload required for this CA is approximately 30-35 hours. 
-
-<div class="alert-info">
-Please also take note of the University’s policy on plagiarism, which is outlined in your student handbook.
- </div>
-
-Plagiarism is the act of passing off the words or ideas of others as if your own. Advice on avoiding plagiarism is given in the UG Student Handbook. There is also considerable help and advice on Learning Central and the University web site. Students need to be especially careful of plagiarism in computing tasks and you are advised not to share code through electronic means. Students working together during their weekly exercises and the coursework is great (and indeed encouraged) but need to ensure that they are not using each other's code or text.
-
-This coursework will be submitted via Learning Central's Turnitin which automatically checks for plagiarism.
-
-#### Tips
 
 
-- Explain all your reasoning for each step. A *significant fraction* of the marks are given for explanations and discussion, as they evidence understanding of the analysis.  
-- Some of these steps will take a while to run and compile. It's a good idea to add in print statements to your code throughout eg `print('this step is done')` to make sure that your bit of code has finished.
-- Add the import packages statements at the top of your Jupyter notebook. We will use the `pandas` package to read in the data, with eg `dataIn=pd.read_csv('filename.csv')`.
-- You may need to do some additional research into this subject. You will find it useful to look at the following publication from the LIGO consortium. https://arxiv.org/pdf/1608.01940.pdf
+## Part A - Some background 
 
-***
-
-## Part A - Some background [15 marks]
-
-**Answer:**
 
 Before starting import all packages that we will use throughout
 
@@ -148,9 +119,8 @@ plt.legend()
     
 
 
-## Part B - The data [15 marks]
+## Part B - The data 
 
-**Answer:**
 
 #### Question 1: 
 Read in the datafile of the observed waveform Observedwaveform.csv. 
@@ -182,12 +152,8 @@ print(waveform_data)
     [636 rows x 2 columns]
     
 
-#### Question 2:
-The GPS time of the merger for your waveform is 1205951542.153363. Your data will need to 
-be shifted so that the merger occurs at time = 0 secs. 
-
-##### Solution:
-To compare our waveform data to model waveforms we must have the merger event occur at t = 0.
+#### Part 2:
+The GPS time of the merger for the waveform is 1205951542.153363. To compare our waveform data to model waveforms we must have the merger event occur at t = 0.
 <br>
 To do this we can simply create a variable merger_time = 1205951542.153363, which is the time given for the merger. Then subtract this time from each element in the "time (s)" column, put the result into a new column "time_shifted (s)". This new shifted column will have the merger occuring at t=0, we can use this column for comparisons and plotting. 
 
@@ -244,12 +210,8 @@ plt.grid(linestyle = "--")
 
 From this plot we can verify that the merger occurs at time = 0, which is what we require going forward.
 
-#### Question 3:
-We need to estimate the average noise and its standard deviation in our data. This requires
-careful thought about where the noise can be seen in the waveform.
-
-##### Solution:
-To estimate the noise we should use the region with the smallest amount of gravitational wave signal. In our data this is the ringdown phase region, after the newly formed black hole has become stable. On our strain vs shifted time plot from question 2, we can estimate this as the region from ~0.025 seconds to the end of the data. 
+#### Part 3:
+We need to estimate the average noise and its standard deviation in our data. To estimate the noise we should use the region with the smallest amount of gravitational wave signal. In our data this is the ringdown phase region, after the newly formed black hole has become stable. On our strain vs shifted time plot from part 2, we can estimate this as the region from ~0.025 seconds to the end of the data. 
 <br>
 Therefore to estimate the average noise and its standard deviation we should:
 <br>
@@ -302,20 +264,12 @@ print(f"Noise Standard Deviation: {noise_std:.3e}")
 
 ***
 
-## Part C - Interpolate reference model to match the observed data time sampling [15 marks]
+## Part C - Interpolate reference model to match the observed data time sampling 
 
-**Answer:**
 
-#### Question 1:
+#### Part 1:
 Open the mock data file using the pandas package. Our data waveform starts at some time
 𝑡min. Find out what this is. Next, take your observed data waveform and output data for t > tmin and t< 0. Verify, by plotting, that your new observed waveform only has data in this restricted time range. 
-
-##### Solution: 
-**Step 1:** Open the mockdata_waveform_40Msun_1Mpc.csv file using the same method as previous files in part A and B.
-<br>
-**Step 2:** Find t_min or the start time of the mock data simply using .min().
-<br>
-**Step 3:** Take the observed data waveform (waveform_data used previously) and filter for the range t > t_min and t < 0. Plot to verify that our waveform only contains data in this range.
 
 
 
@@ -386,11 +340,8 @@ plt.grid(linestyle = "--")
 
 observed waveform data is now only contained in the restricted range. 
 
-#### Question 2:
-Open the reference file using the pandas package. We need to interpolate the reference waveform to match the time samples of the data. 
-
-##### Solution:
-In this question we are going to convert our reference waveform from the *reference_waveform_40Msun_1Mpc.csv* file, which has 22,000+ data points, to have the same number of x data points as our mock data, which has 337 data points. We will do this using the interpolation object in python.
+#### Part 2:
+Now we are going to convert our reference waveform from the *reference_waveform_40Msun_1Mpc.csv* file, which has 22,000+ data points, to have the same number of x data points as our mock data, which has 337 data points. We will do this using the interpolation object in python.
 <br>
 **Step 1:** Open the reference file reference_waveform_40Msun_1Mpc.csv using pandas. Plot to verify.
 <br>
@@ -454,11 +405,10 @@ plt.grid(linestyle = "--")
 
 ***
 
-## Part D - Using model waveforms to estimate the total mass and distance to the system "a by-eye estimate") [24 marks]
+## Part D - Using model waveforms to estimate the total mass and distance to the system "a by-eye estimate")
 
-**Answer:**
 
-#### Question 1: 
+#### Part 1: 
 Write a function in python to produce the time 𝑡 and strain ℎ of a general waveform with 𝑞 = 1, total mass 𝑀 and distance D.
 
 ##### Solution:
@@ -481,7 +431,7 @@ These equations will be used in our function to scale the waveform. We also requ
 
 ```python
 #PART D:
-#Question 1:
+#1:
 
 def generate_waveform(interp_fn, t_ref, M_ref, D_ref, M, D):
    
@@ -521,10 +471,7 @@ Then we use the interpolation function to evaluate the strain of the reference w
 <br>
 The we can use this to calculate the scaled strain ($h(t,M,D)$) and finally return the scaled time and strain.
 
-#### Question 2:
-Test your function works and comment on the results.
-
-##### Solution:
+#### Part 2:
 To ensure our function is producing accurate results we must test it and compare against mock data with known parameters.
 <br>
 Call the function wtih values of $M = 70M_{\rm {sun}}$ and $D = 5Mpc$ and plot the returned waveform. Compare this to the mock  data for the same mass and distance in the *mockdata_waveform_70Msun_5Mpc.csv* file. Comment on the closeness of the waveforms and thus the validity of our newly created function.
@@ -539,7 +486,7 @@ mock_strain = mockdata_waveform_70Msun_5Mpc['strain'].values
 
 ```python
 #PART D:
-#Question 2:
+#2:
 
 #parameters
 M_ref = 40  #reference mass (Msun)
@@ -572,10 +519,7 @@ plt.show()
 
 Testing our function against the mock data produces encouraging results. The generated waveform perfectly matches the mock data for the same mass and distance. This proves that our function is working as intended and we can use it to produce template waveforms to fit parameters.
 
-#### Question 3:
-Use your function to scale the reference waveform (𝑀 = 40𝑀𝑠𝑢𝑛, 𝐷 = 1Mpc) to make an initial rough estimate “by eye” of the total mass and distance that “best” fits your data.
-
-##### Solution:
+#### Part 3:
 An initial "by eye" estimate can be made for the best fit of our mass and distance paramters. To do this we can generate multiple template waveforms with different masses and distances, then compare these waveforms with our observed data to find an approximate fit. This is a very rough approximation which will be reflected in the large uncertainties.
 <br>
 **Step 1:** Create arrays of test masses and distances that will be used to generate the model waveforms. Choose an appropriate increment (5Msun and 100Mpc).
@@ -706,24 +650,21 @@ plt.grid(linestyle = "--")
     
 
 
-Plot 4 shows a close match between the by eye estimated parameters and the observed waveform. This serves to validate my estimates to reasonable accuracy.   
+Plot 4 shows a close match between the by eye estimated parameters and the observed waveform.
 
 I created plots 1 and 2 to explore how changing the mass and distance parameters effect the scaled waveform. 
 <br>
 Plot 1 is changing distance with a constant mass. This plot shows a larger distance reduces the amplitude of the strain, which is expected from the equation for scaled strain displayed in question 1. 
 <br>
-In plot 2 the mass is changed with a constant distance. Our equations show both the scaled time and strain depend on mass. Due to this a M-D degeneracy arises where different combinations of M and D can result in simular strain amplitudes and hence simular waveforms. This can make it challenging to estimate these parameters using the "by eye" method leading to the large uncertainties.
+In plot 2 the mass is changed with a constant distance. Our equations show both the scaled time and strain depend on mass. Due to this a M-D degeneracy arises where different combinations of M and D can result in simular strain amplitudes and hence simular waveforms. This can make it challenging to estimate these parameters using the "by eye" method leading to the large uncertainties, hence the need for a more robust method.
 
 ***
 
-## Part E - Estimating the total mass using MCMC [75 marks]
+## Part E - Estimating the total mass using MCMC 
 
-**Answer:**
 
-#### Question 1: 
+#### Part 1: 
 Use MCMC to sample the total mass and distance to find the “best values”.
-
-##### Solution:
 
 The Markov-Chain Monte Carlo (MCMC) method has many uses, one of which is to fit models to data. This works by comparing generated template models against the observed data. In our case models will be generated by the mass and distance parameters using our function created in part D, we can sample from this set of parameters to produce best fit models for our data. 
 
@@ -841,11 +782,7 @@ After trying several different initial conditions and step sizes a mass step siz
 <br>
 $1000000 (10^6)$ steps where used and this allowed for the posterior distribution to take an expected gaussian form. This also gave an acceptance ratio of $0.22$ which lies within the expected range. The main downside to this number of steps is the computation time and storage required. 
 
-#### Question 2:
-Display the results in an appropriate manner and comment on your findings, as well as your
-results from the MCMC. Has your MCMC converged?
-
-##### Solution: 
+#### Part 2:
 To appropriately analyse our findings from the MCMC we can plot the mass and distance chains, this allows us to visualise how the MCMC expolored the parameter space and determine if it converges onto a particular value. We can also plot the posterior distribution histogram for each parameter, we expect the histogram to take a gaussian distribution where the peak highlights the most likely value for the parameter. 
 
 
@@ -977,12 +914,8 @@ It is clear from this convergence test that our MCMC converges on the same value
 
 It should be mentioned that thinning could be used on our MCMC sample to reduce any autocorrelation present in the walk, this is done by keeping every n-th sample and removing the rest. This is also useful for reducing computationally expensive MCMC chains and producing clearer visual data. I have chosen not to use thinning on my data chains, as the convergence is already clear from previous plots and thinning can reduce the sample size and thus the precision of our parameter values.
 
-#### Question 3:
-Report the median and 90% credible limits on your value of 𝑀 and comment on your values.
-Compare the waveform generated from your MCMC result with the observed waveform.
-
-##### Solution:
-Simply calculate median and 90% credible limits, then compare the waveform given by the mean parameter values of the MCMC chains with the observed waveform using the generate_waveform function. 
+#### Part 3:
+We can calculate the median and 90% credible limits on the value of 𝑀, then compare the waveform given by the mean parameter values of the MCMC chains with the observed waveform using the generate_waveform function. 
 
 
 ```python
@@ -1052,15 +985,11 @@ The generated waveform seems an appropriate fit and matches the observed wavefor
 
 ***
 
-## Part F - Putting it all together [36 marks]
+## Part F - Putting it all together 
 
-**Answer:**
+#### Part 1:
+Estimate the chirp mass for your system and the individual masses of your merging bodies.
 
-#### Question 1:
-Estimate the chirp mass for your system and the individual masses of your merging bodies,
-describing your reasoning. Comment on your individual masses.
-
-##### Solution:
 The chirp mass of a binary system determines the orbital evolution of the system as a result of energy lost from emitted gravitational waves.
 <br>
 To estimate the chirp mass we can use the following formula:
@@ -1102,10 +1031,9 @@ The individual masses of $M_1 = M_2 \approx 38.50M_{sun}$, derived from the $q \
 <br>
 A chirp mass of $M_{ch} = 33.52M_{sun}$ also indicates that our system is high mass and has a high frequency merger. 
 
-#### Question 2: 
-Estimate the period from your observed waveform around the peak amplitude of the wave.
+#### Part 2: 
+Now we can estimate the period from your observed waveform around the peak amplitude of the wave.
 
-##### Solution:
 **Step 1:** Find where the amplitude of the waveform strain peaks.
 <br>
 **Step 2:** Define a small window around the peak amplitude to measure the period in, this window should only include the merger phase and not the inspiral or ringdown.
@@ -1175,12 +1103,9 @@ The period estimated is $P_{GW} = 0.00354s$, this corresponds to a near merger g
 <br>
 We calculate the orbital period and frequency: $P_{orb} = 2 \times P_{GW} = 0.00708s$ and $f_{orb} = 141Hz$. These values are also consistent with the dynamics of large mass binary black holes at the time near merger. 
 
-#### Question 3:
-Use your period to estimate the orbital separation in km of the two bodies around 
-peak amplitude.
-
-##### Solution:
-
+#### Part 3:
+Use the period to estimate the orbital separation in km of the two bodies around peak amplitude.
+<br>
 Assuming the objects are not spinning and are in circular Keplerian orbits until the merger, then the orbital seperation of the two bodies at peak amplitude can be given by:
 $$R = \left( \frac{G(M_1+M_2)}{\omega^2_{max}}\right) ^{1/3}$$
 where $G$ is the gravitational constant and $\omega^2_{max}$ is the angular frequency which is related to the gravitational wave period calculated in question 2 via the formula: $\omega _{max}= \frac{2\pi }{2P_{GW}}$. This was found using the relationship between orbital and gravitational wave period already mentioned: $P_{orb} = 2 \times P_{GW}$.
@@ -1204,9 +1129,9 @@ print(f"Oribital seperation, R = {R_km:.2f}km")
 
 The orbital seperation was given as: $R = 235km$. For comparison the orbit of Mercury has $R \approx 53 \times 10^6km$.
 
-#### Question 4:
-Comment on what your analysis suggests are the best astrophysical candidates for the merging 
-objects?
+#### Part 4:
+What does your analysis suggest are the best astrophysical candidates for the merging objects?
+
 
 Our analyse suggests that the merging objects are likely black holes formed from massive progenitor stars. With our justified assumption of $q \sim 1$ we derived individual masses of $M_1 = M_2 \approx 38.50M_{sun}$ and a chirp mass of $M_{ch} = 33.52M_{sun}$. Both of these are consistent with black holes and too large for to be the masses of neutron stars. The near merger gravitational wave frequency is also consistent with the rest of our analysis, being lower due to the high mass binary objects. The amplitude of our model MCMC waveform matches that of the observed waveform, which justifys our fit parameters and hence our conclusion that the merging objects are black holes. 
 <br>
@@ -1217,6 +1142,3 @@ https://arxiv.org/pdf/1608.01940
 
 ***
 
-## Evidence of Understanding, Presentation and Interpretation [20 marks]
-
-An additional 20 marks will be awarded for evidence of understanding and knowledge via (for example) explanations, plots, comments on your results and well formatted and well explained results. Marks are also available for additional investigations carried out on your analysis above. These marks are available for those data analysis reports that show evidence of work that is *very high quality* or *outstanding* as per the decile descriptions in the Assessment Criteria for modules. <div align="right">**[20 marks]**</div>
