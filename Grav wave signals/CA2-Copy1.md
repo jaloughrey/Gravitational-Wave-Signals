@@ -39,7 +39,7 @@ We can plot the total mass of the merging sources against their distance.
 
 ```python
 #PART A:
-#Question 3: 
+#2: 
 
 #using pandas to read file
 GWevents = pd.read_csv('gravitationalwaveevents.csv')
@@ -116,7 +116,7 @@ Our observed waveform is located in the file Observedwaveform.csv, we first need
 
 ```python
 #PART B: 
-#Question 1:
+#1:
 waveform_data = pd.read_csv('Observedwaveform.csv')
 print(waveform_data)
 ```
@@ -145,7 +145,7 @@ To do this we can simply create a variable merger_time = 1205951542.153363, whic
 
 
 ```python
-#Question 2: 
+#2: 
 merger_time = 1205951542.153363
 
 #shift the time column so the merger occurs at t = 0 seconds
@@ -259,7 +259,7 @@ For this part we need to access the mock data file. Our data waveform starts at 
 
 ```python
 #PART C: 
-#Question 1: 
+#1: 
 mockdata_waveform_40Msun_1Mpc = pd.read_csv('mockdata_waveform_40Msun_1Mpc.csv')
 
 #strain vs shifted time (s) 
@@ -336,7 +336,7 @@ Now we are going to convert our reference waveform from the *reference_waveform_
 
 ```python
 #Part C:
-#Question 2:
+#2:
 reference_waveform_40Msun_1Mpc = pd.read_csv('reference_waveform_40Msun_1Mpc.csv')
 ref_time = reference_waveform_40Msun_1Mpc['time (s)'].values
 ref_strain = reference_waveform_40Msun_1Mpc['strain'].values
@@ -514,7 +514,7 @@ An initial "by eye" estimate can be made for the best fit of our mass and distan
 
 ```python
 #PART D:
-#Question 3: 
+#3: 
 
 waveform_time = waveform_data['time_shifted (s)'].values
 waveform_strain = waveform_data['strain'].values
@@ -637,7 +637,7 @@ Plot 4 shows a close match between the by eye estimated parameters and the obser
 
 I created plots 1 and 2 to explore how changing the mass and distance parameters effect the scaled waveform. 
 <br>
-Plot 1 is changing distance with a constant mass. This plot shows a larger distance reduces the amplitude of the strain, which is expected from the equation for scaled strain displayed in question 1. 
+Plot 1 is changing distance with a constant mass. This plot shows a larger distance reduces the amplitude of the strain, which is expected from the equation for scaled strain displayed in part 1. 
 <br>
 In plot 2 the mass is changed with a constant distance. Our equations show both the scaled time and strain depend on mass. Due to this a M-D degeneracy arises where different combinations of M and D can result in simular strain amplitudes and hence simular waveforms. This can make it challenging to estimate these parameters using the "by eye" method leading to the large uncertainties, hence the need for a more robust method.
 
@@ -821,7 +821,7 @@ However looking closer at these plots it could be argued that the method impleme
 One reason that could explain this is the implementation used is very sensitive to the step-size. A small step size was selected as this met the desired acceptance ratio, however a step size too small may see the chain failing to explore too far from the high probability values which could be what we are seeing with the mass chain. A solution could be too create an adaptive step size which aims to meet a set acceptance rate. 
 <br>
 <br>
-The initial guess value is also important, a bad intial guess can increase the amount of iteration required to find the convergence value. Furthermore, if the posterior distribution is multimodal, the chain could get stuck in a local minimum returning a value that isnt the true minimum. A burnin can be used to reduce the distributions dependance on the intial value, we have a large number of N steps $(10^6)$ and used our prior "by eye" estimates as starting parameters so a burnin likely isnt necessary, but we can still include it in question 3 when we are computing our values. 
+The initial guess value is also important, a bad intial guess can increase the amount of iteration required to find the convergence value. Furthermore, if the posterior distribution is multimodal, the chain could get stuck in a local minimum returning a value that isnt the true minimum. A burnin can be used to reduce the distributions dependance on the intial value, we have a large number of N steps $(10^6)$ and used our prior "by eye" estimates as starting parameters so a burnin likely isnt necessary, but we can still include it in part 3 when we are computing our values. 
 <br>
 To confirm our convergence it is important to trail multiple different intial guesses further from the prior value. We can compare the difference in the rolling means of each sample and this should tend to 0 as each sample converges. A well-tuned MCMC method should eventually converge regardless of the intial guess parameters.
 
@@ -1091,7 +1091,7 @@ Use the period to estimate the orbital separation in km of the two bodies around
 <br>
 Assuming the objects are not spinning and are in circular Keplerian orbits until the merger, then the orbital seperation of the two bodies at peak amplitude can be given by:
 $$R = \left( \frac{G(M_1+M_2)}{\omega^2_{max}}\right) ^{1/3}$$
-where $G$ is the gravitational constant and $\omega^2_{max}$ is the angular frequency which is related to the gravitational wave period calculated in question 2 via the formula: $\omega _{max}= \frac{2\pi }{2P_{GW}}$. This was found using the relationship between orbital and gravitational wave period already mentioned: $P_{orb} = 2 \times P_{GW}$.
+where $G$ is the gravitational constant and $\omega^2_{max}$ is the angular frequency which is related to the gravitational wave period calculated in part 2 via the formula: $\omega _{max}= \frac{2\pi }{2P_{GW}}$. This was found using the relationship between orbital and gravitational wave period already mentioned: $P_{orb} = 2 \times P_{GW}$.
 
 
 ```python
@@ -1124,5 +1124,6 @@ Although the analysis suggests black holes as the merging objects it is also wor
 https://arxiv.org/pdf/1608.01940
 
 ***
+
 
 
