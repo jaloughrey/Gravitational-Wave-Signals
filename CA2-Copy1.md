@@ -145,6 +145,8 @@ plt.legend()
 
     
 ![png](output_20_1.png)
+<img width="689" height="471" alt="output_20_1" src="https://github.com/user-attachments/assets/48be721e-2d4d-449a-9035-2ce1210c47f8" />
+
     
 
 
@@ -1207,6 +1209,7 @@ The orbital seperation was given as: $R = 235km$. For comparison the orbit of Me
 #### Question 4:
 Comment on what your analysis suggests are the best astrophysical candidates for the merging 
 objects?
+
 
 Our analyse suggests that the merging objects are likely black holes formed from massive progenitor stars. With our justified assumption of $q \sim 1$ we derived individual masses of $M_1 = M_2 \approx 38.50M_{sun}$ and a chirp mass of $M_{ch} = 33.52M_{sun}$. Both of these are consistent with black holes and too large for to be the masses of neutron stars. The near merger gravitational wave frequency is also consistent with the rest of our analysis, being lower due to the high mass binary objects. The amplitude of our model MCMC waveform matches that of the observed waveform, which justifys our fit parameters and hence our conclusion that the merging objects are black holes. 
 <br>
