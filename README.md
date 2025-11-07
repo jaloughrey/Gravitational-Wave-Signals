@@ -103,7 +103,7 @@ plt.legend()
 
 
     
-![png](output_20_1.png)
+![png](plots/output_20_1.png)
     
 
 
