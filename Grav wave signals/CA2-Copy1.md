@@ -2,10 +2,10 @@
 # What caused this gravitational wave signal?
 
 
-## Part A - Some background 
+## Part A - Background 
 
 
-Before starting import all packages that we will use throughout
+Import all packages that we will use throughout
 
 
 ```python
@@ -14,20 +14,8 @@ import pylab as plt
 import pandas as pd
 ```
 
-#### Question 1: 
-How do astronomers know that the gravitational waves from the GW150914 event were due
-to two black holes merging?
-
-For the GW150914 event can be attributed to two black holes (BH) for the following reasons: 
-<br>
-**(1)** The observed waveform matches predictions for a binary black hole merger.
-<br>
-**(2)** Infered masses are very large which rules out other compact objects such as neutron stars.
-<br>
-**(3)** Absence of an electromagnetic signal can rule out other possible events such as supernova or gamma-ray burst.
-
-#### Question 2: 
-Describe the different parts of the waveform produced due to gravitational waves from a
+#### Part 1: 
+It is important for this project to understand the different parts of the waveform produced due to gravitational waves from a
 merging black hole event.
 
 A gravitational wave signal from a merging black hole event can be split into three distinct parts: 
@@ -38,8 +26,8 @@ A gravitational wave signal from a merging black hole event can be split into th
 <br>
 **(3) Ringdown phase:** The single newly formed BH continues to emit gravitational waves as it settles into a stable Kerr state. The amplitude of the waveform drops sharply and the frequency becomes stable based on the properties of the new BH. 
 
-#### Question 3: 
-Plot the total mass of the merging sources against their distance.
+#### Part 2: 
+We can plot the total mass of the merging sources against their distance.
 
 ##### Solution: 
 **Step 1:** Use the pandas package to read the gravitationalwaveevents.csv file, validate this worked by printing the data. 
@@ -122,11 +110,8 @@ plt.legend()
 ## Part B - The data 
 
 
-#### Question 1: 
-Read in the datafile of the observed waveform Observedwaveform.csv. 
-
-##### Solution:
-The file can simply be read using the pandas package like we did in part A.
+#### Part 1: 
+Our observed waveform is located in the file Observedwaveform.csv, we first need to read access this data.
 
 
 ```python
@@ -211,7 +196,7 @@ plt.grid(linestyle = "--")
 From this plot we can verify that the merger occurs at time = 0, which is what we require going forward.
 
 #### Part 3:
-We need to estimate the average noise and its standard deviation in our data. To estimate the noise we should use the region with the smallest amount of gravitational wave signal. In our data this is the ringdown phase region, after the newly formed black hole has become stable. On our strain vs shifted time plot from part 2, we can estimate this as the region from ~0.025 seconds to the end of the data. 
+We need to estimate the average noise and its standard deviation in our observed data. To estimate the noise we should use the region with the smallest amount of gravitational wave signal. In our data this is the ringdown phase region, after the newly formed black hole has become stable. On our strain vs shifted time plot from part 2, we can estimate this as the region from ~0.025 seconds to the end of the data. 
 <br>
 Therefore to estimate the average noise and its standard deviation we should:
 <br>
@@ -268,9 +253,8 @@ print(f"Noise Standard Deviation: {noise_std:.3e}")
 
 
 #### Part 1:
-Open the mock data file using the pandas package. Our data waveform starts at some time
-𝑡min. Find out what this is. Next, take your observed data waveform and output data for t > tmin and t< 0. Verify, by plotting, that your new observed waveform only has data in this restricted time range. 
-
+For this part we need to access the mock data file. Our data waveform starts at some time
+𝑡min. We must first find out what this is. Next, we can take the observed data waveform and output data for t > tmin and t< 0. We then plot to verify that the new observed waveform only has data in this restricted time range. 
 
 
 ```python
@@ -347,7 +331,7 @@ Now we are going to convert our reference waveform from the *reference_waveform_
 <br>
 **Step 2:** Create an interpolation object using the reference waveform, and use this to interpolate the data waveform. 
 <br>
-**Step 3:** Plot the interpolated strain against the mock data time. Comment on this plot.
+**Step 3:** Plot the interpolated strain against the mock data time. 
 
 
 ```python
@@ -405,7 +389,7 @@ plt.grid(linestyle = "--")
 
 ***
 
-## Part D - Using model waveforms to estimate the total mass and distance to the system "a by-eye estimate")
+## Part D - Create model waveforms to estimate the total mass and distance to the system.
 
 
 #### Part 1: 
@@ -474,8 +458,7 @@ The we can use this to calculate the scaled strain ($h(t,M,D)$) and finally retu
 #### Part 2:
 To ensure our function is producing accurate results we must test it and compare against mock data with known parameters.
 <br>
-Call the function wtih values of $M = 70M_{\rm {sun}}$ and $D = 5Mpc$ and plot the returned waveform. Compare this to the mock  data for the same mass and distance in the *mockdata_waveform_70Msun_5Mpc.csv* file. Comment on the closeness of the waveforms and thus the validity of our newly created function.
-
+Call the function with values of $M = 70M_{\rm {sun}}$ and $D = 5Mpc$ and plot the returned waveform. Compare this to the mock data for the same mass and distance in the *mockdata_waveform_70Msun_5Mpc.csv* file. 
 
 ```python
 mockdata_waveform_70Msun_5Mpc = pd.read_csv('mockdata_waveform_70Msun_5Mpc.csv')
@@ -988,7 +971,7 @@ The generated waveform seems an appropriate fit and matches the observed wavefor
 ## Part F - Putting it all together 
 
 #### Part 1:
-Estimate the chirp mass for your system and the individual masses of your merging bodies.
+Estimate the chirp mass for your system and the individual masses of the merging bodies.
 
 The chirp mass of a binary system determines the orbital evolution of the system as a result of energy lost from emitted gravitational waves.
 <br>
@@ -1032,7 +1015,7 @@ The individual masses of $M_1 = M_2 \approx 38.50M_{sun}$, derived from the $q \
 A chirp mass of $M_{ch} = 33.52M_{sun}$ also indicates that our system is high mass and has a high frequency merger. 
 
 #### Part 2: 
-Now we can estimate the period from your observed waveform around the peak amplitude of the wave.
+Now we can estimate the period from the observed waveform around the peak amplitude of the wave.
 
 **Step 1:** Find where the amplitude of the waveform strain peaks.
 <br>
@@ -1097,7 +1080,7 @@ plt.grid(linestyle = "--")
     
 
 
-Here the plot shows the window around the peak amplitude we are measureing the period in, this window contains 5 zero-crossings which gives a reasonable estimation for period at the merger. 
+Here the plot shows the window around the peak amplitude we are measuring the period in, this window contains 5 zero-crossings which gives a reasonable estimation for period at the merger. 
 <br>
 The period estimated is $P_{GW} = 0.00354s$, this corresponds to a near merger gravitational wave frequency of: $f_{GW} = 282Hz$. This frequency is consistent with our total mass and chirp mass of the system, which is further supporting evidence of two binary black hole objects in our system. 
 <br>
@@ -1130,10 +1113,10 @@ print(f"Oribital seperation, R = {R_km:.2f}km")
 The orbital seperation was given as: $R = 235km$. For comparison the orbit of Mercury has $R \approx 53 \times 10^6km$.
 
 #### Part 4:
-What does your analysis suggest are the best astrophysical candidates for the merging objects?
+What does our analysis suggest are the best astrophysical candidates for the merging objects?
 
 
-Our analyse suggests that the merging objects are likely black holes formed from massive progenitor stars. With our justified assumption of $q \sim 1$ we derived individual masses of $M_1 = M_2 \approx 38.50M_{sun}$ and a chirp mass of $M_{ch} = 33.52M_{sun}$. Both of these are consistent with black holes and too large for to be the masses of neutron stars. The near merger gravitational wave frequency is also consistent with the rest of our analysis, being lower due to the high mass binary objects. The amplitude of our model MCMC waveform matches that of the observed waveform, which justifys our fit parameters and hence our conclusion that the merging objects are black holes. 
+The merging objects are likely black holes formed from massive progenitor stars. With our justified assumption of $q \sim 1$ we derived individual masses of $M_1 = M_2 \approx 38.50M_{sun}$ and a chirp mass of $M_{ch} = 33.52M_{sun}$. Both of these are consistent with black holes and too large for to be the masses of neutron stars. The near merger gravitational wave frequency is also consistent with the rest of our analysis, being lower due to the high mass binary objects. The amplitude of our model MCMC waveform matches that of the observed waveform, which justifys our fit parameters and hence our conclusion that the merging objects are black holes. 
 <br>
 Although the analysis suggests black holes as the merging objects it is also worth considering the higher order effects on the waveform, such as eccentricity and spin of the objects as these will alter our estimations and could change the way we see the system. 
 
@@ -1141,4 +1124,5 @@ Although the analysis suggests black holes as the merging objects it is also wor
 https://arxiv.org/pdf/1608.01940
 
 ***
+
 
