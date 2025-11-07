@@ -189,7 +189,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_30_0.png)
+![png](plots/output_30_0.png)
     
 
 
@@ -226,7 +226,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_36_0.png)
+![png](plots/output_36_0.png)
     
 
 
@@ -275,7 +275,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_44_0.png)
+![png](plots/output_44_0.png)
     
 
 
@@ -318,7 +318,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_48_0.png)
+![png](plots/output_48_0.png)
     
 
 
@@ -354,7 +354,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_52_0.png)
+![png](plots/output_52_0.png)
     
 
 
@@ -383,7 +383,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_53_0.png)
+![png](plots/output_53_0.png)
     
 
 
@@ -496,7 +496,7 @@ plt.show()
 
 
     
-![png](output_64_0.png)
+![png](plots/output_64_0.png)
     
 
 
@@ -561,7 +561,7 @@ compare_waveforms(waveform_time, waveform_strain, interp_fn, M_ref, D_ref, M_ran
 
 
     
-![png](output_70_0.png)
+![png](plots/output_70_0.png)
     
 
 
@@ -579,7 +579,7 @@ compare_waveforms(waveform_time, waveform_strain, interp_fn, M_ref, D_ref, M_ran
 
 
     
-![png](output_72_0.png)
+![png](plots/output_72_0.png)
     
 
 
@@ -597,7 +597,7 @@ compare_waveforms(waveform_time, waveform_strain, interp_fn, M_ref, D_ref, M_ran
 
 
     
-![png](output_75_0.png)
+![png](plots/output_75_0.png)
     
 
 
@@ -629,7 +629,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_78_0.png)
+![png](plots/output_78_0.png)
     
 
 
@@ -810,7 +810,7 @@ plt.show()
 
 
     
-![png](output_93_0.png)
+![png](plots/output_93_0.png)
     
 
 
@@ -889,7 +889,7 @@ plt.show()
 
 
     
-![png](output_95_1.png)
+![png](plots/output_95_1.png)
     
 
 
@@ -956,7 +956,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_100_1.png)
+![png](plots/output_100_1.png)
     
 
 
@@ -1076,7 +1076,7 @@ plt.grid(linestyle = "--")
 
 
     
-![png](output_112_0.png)
+![png](plots/output_112_0.png)
     
 
 
